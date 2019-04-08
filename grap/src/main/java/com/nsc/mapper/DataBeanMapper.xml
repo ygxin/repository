@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nsc.mapper.DataBeanMapper">
+	<insert id="insertDataBean" parameterType="com.nsc.pojo.DataBean">
+		INSERT INTO
+		t_b_crawler_proj_info ( id, baseurl, country, meta, product, name,
+		href, status, approvaldate, url , approval, projecttype)
+		 VALUES
+		(#{id},#{baseurl},#{country},#{meta},#{product},#{name},#{href},#{status},#{approvaldate},#{url},#{approval},#{projecttype})
+	</insert>
+
+	<select id="findDataBean" parameterType="java.lang.String"
+		resultType="com.nsc.pojo.DataBean">
+	 select * from t_b_crawler_proj_info where name = #{value}
+	</select>
+
+</mapper>

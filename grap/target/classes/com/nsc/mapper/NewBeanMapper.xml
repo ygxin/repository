@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nsc.mapper.NewBeanMapper">
+	<insert id="insertNewBean" parameterType="com.nsc.pojo.NewBean">
+		INSERT INTO
+		t_b_announce ( ANNOUNCE_ID, ANNOUNCE_TITLE, ANNOUNCE_SUB_TITLE,
+		ANNOUNCE_SOURCE, ANNOUNCE_AUTHOR, ANNOUNCE_DATE, ANNOUNCE_FONT_SIZE,
+		ANNOUNCE_CONTENT, CUSTOM1, datastatus )
+		values
+		(#{ANNOUNCE_ID},#{ANNOUNCE_TITLE},#{ANNOUNCE_SUB_TITLE},#{ANNOUNCE_SOURCE},#{ANNOUNCE_AUTHOR},#{ANNOUNCE_DATE},#{ANNOUNCE_FONT_SIZE},#{ANNOUNCE_CONTENT},#{CUSTOM1},#{datastatus})
+	</insert>
+
+	<select id="findNewBean" parameterType="java.lang.String"
+		resultType="com.nsc.pojo.NewBean">
+		SELECT * FROM t_b_announce  WHERE
+		ANNOUNCE_TITLE =
+		#{value}
+	</select>
+
+</mapper>

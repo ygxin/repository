@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nsc.mapper.BusinessNewsMapper">
+	<resultMap type="com.nsc.pojo.BusinessNews" id="BusinessNews">
+		<id property="newsId" column="NEWS_ID" />
+		<result property="newsTitle" column="NEWS_TITLE"/>
+		<result property="newsSubTitle" column="NEWS_SUB_TITLE"/>
+		<result property="newsSource" column="NEWS_SOURCE"/>
+		<result property="newsAuthor" column="NEWS_AUTHOR"/>
+		<result property="newsDate" column="NEWS_DATE"/>
+		<result property="newsFontSize" column="NEWS_FONT_SIZE"/>
+		<result property="newsContent" column="NEWS_CONTENT"/>
+		<result property="custom3" column="CUSTOM3"/>
+		<result property="datastatus" column="datastatus"/>
+	</resultMap>
+	<select id="findBusinessNewsInfo" parameterType="java.lang.String" resultType="com.nsc.pojo.BusinessNews" resultMap="BusinessNews">
+		select * from
+		t_b_news where NEWS_TITLE = #{value}
+	</select>
+	<insert id="insertBusinessNewsInfo" parameterType="com.nsc.pojo.BusinessNews" >
+		insert into
+		t_b_news (NEWS_ID , NEWS_TITLE , NEWS_SOURCE ,
+		NEWS_AUTHOR,NEWS_DATE
+		,NEWS_CONTENT) values
+		(#{newsId},#{newsTitle},#{newsSource},#{newsAuthor},#{newsDate},#{newsContent})
+
+	</insert>
+	
+</mapper>

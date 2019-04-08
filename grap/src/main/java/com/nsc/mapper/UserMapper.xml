@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nsc.mapper.UserMapper">
+	<resultMap type="com.nsc.pojo.User" id="User">
+		<id property="id" column="id"  />
+		<result property="username" column="username" />
+		<result property="sex" column="sex" />
+		<result property="age" column="age" />
+		<result property="address" column="address" />
+		<result property="isredis" column="isRedis" />
+		<result property="brithday" column="brithday" />
+		<result property="createdate" column="createDate" />
+		<result property="updatetime" column="updateTime" />
+		<result property="sort" column="sort" />
+		<result property="password" column="password" />
+		<result property="salt" column="salt" />
+		<result property="name" column="name" />
+	</resultMap>
+	<select id="findUserInfo" resultType="com.nsc.pojo.User">
+		select * from t_user order by sort desc
+	</select>
+
+	<select id="findUserInfobyId" resultType="com.nsc.pojo.User">
+		select a.* from t_user a where a.id = #{value}
+	</select>
+	<insert id="saveUser" parameterType="com.nsc.pojo.User">
+		insert into t_user (id ,username ,sex
+		,age,address,isredis,brithday,createdate,updatetime,sort)
+		values
+		(#{id},{username},#{sex},#{age},#{address},#{isredis},#{brithday},#{createdate},#{updatetime},#{sort})
+	</insert>
+	<update id="updateUser" parameterType="com.nsc.pojo.User">
+		update t_user set username = #{username} ,sex = #{sex} ,age = #{age},address
+		= #{address},isredis=#{isredis},brithday=#{brithday},createdate=#{createdate},updatetime=#{updatetime},sort=#{sort}
+		where id = #{id}
+	</update>
+	<delete id="deleteUser" parameterType="java.lang.String">
+		delete from t_user where id = #{value}
+	</delete>
+	<select id="findName"  parameterType="java.lang.String" resultType="com.nsc.pojo.User">
+		select * from t_user where username = #{value}
+	</select>
+	<select id="findCount"   resultType="java.lang.Integer">
+		select count(*) from t_user where 1 = 1
+	</select>
+	<select id="findUserpage"  parameterType="java.lang.Integer" resultType="com.nsc.pojo.User" >
+		select * from t_user limit ${start},#{pagesize} 
+	</select>
+</mapper>
