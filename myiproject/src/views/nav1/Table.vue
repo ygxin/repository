@@ -15,6 +15,7 @@
         </el-col>
         <!--列表-->
 		<el-table :data="users" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
+			<el-table-column  prop="id" label="id" v-if="hiddenid"></el-table-column>
 			<el-table-column type="selection" width="55">
 			</el-table-column>
 			<el-table-column type="index" width="60">
@@ -68,6 +69,33 @@
 				<el-button type="primary" @click.native="addSubmit" :loading="addLoading">提交</el-button>
 			</div>
 		</el-dialog>
+		<!--编辑界面-->
+		<el-dialog title="编辑" v-model="editFormVisible" :visible.sync= "editFormVisible">
+			<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
+				<el-form-item label="姓名" prop="name">
+					<el-input v-model="editForm.name" auto-complete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="性别">
+					<el-radio-group v-model="editForm.sex">
+						<el-radio class="radio" :label="1">男</el-radio>
+						<el-radio class="radio" :label="0">女</el-radio>
+					</el-radio-group>
+				</el-form-item>
+				<el-form-item label="年龄">
+					<el-input-number v-model="editForm.age" :min="0" :max="200"></el-input-number>
+				</el-form-item>
+				<el-form-item label="生日">
+					<el-date-picker type="date" placeholder="选择日期" v-model="editForm.brithday"></el-date-picker>
+				</el-form-item>
+				<el-form-item label="地址">
+					<el-input type="textarea" v-model="editForm.address"></el-input>
+				</el-form-item>
+			</el-form>
+			<div slot="footer" class="dialog-footer">
+				<el-button @click.native="editFormVisible = false">取消</el-button>
+				<el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
+			</div>
+		</el-dialog>
     </section>        
 </template>
 <script>
@@ -80,6 +108,7 @@ export default {
     name:'Table',
     data(){
         return {
+			hiddenid:false,
             filters:{
             name:''
             },
@@ -89,22 +118,38 @@ export default {
             listLoading : false,
             sels: [],//列表选中列,
             limit:10,
-
+			stripe:true,
             dialogVisible : false,//新增界面是否显示
-				addLoading: false,
-				addFormRules: {
+			addLoading: false,
+			addFormRules: {
+				name: [
+					{ required: true, message: '请输入姓名', trigger: 'blur' }
+				]
+			},
+			editFormVisible :false,
+			editLoading: false,
+				editFormRules: {
 					name: [
 						{ required: true, message: '请输入姓名', trigger: 'blur' }
 					]
 				},
-				//新增界面数据
-				addForm: {
-					name: '',
-					sex: -1,
-					age: 0,
-					birth: '',
-					addr: ''
-				}
+			//编辑界面数据
+			editForm: {
+				id: 0,
+				name: '',
+				sex: -1,
+				age: 0,
+				birth: '',
+				addr: ''
+		    },
+			//新增界面数据
+			addForm: {
+				name: '',
+				sex: -1,
+				age: 0,
+				birth: '',
+				addr: ''
+			}
            
         }
     },
@@ -131,8 +176,9 @@ export default {
                 address:''
             }
         },
-        handleEdit(){
-
+        handleEdit(index ,row){
+			this.editFormVisible = true;
+			this.editForm = Object.assign({}, row);
         },
         handleDel(){
 
@@ -169,13 +215,36 @@ export default {
 									type: 'success'
 								});
 								this.$refs['addForm'].resetFields();
-								this.addFormVisible = false;
+								this.dialogVisible = false;
 								this.getUsers();
 							});
 						});
 					}
 				});
-        }
+		},
+		editSubmit: function(){
+			this.$refs.editForm.validate((valid) => {
+					if (valid) {
+						this.$confirm('确认提交吗？', '提示', {}).then(() => {
+							this.editLoading = true;
+							//NProgress.start();
+							let para = Object.assign({}, this.editForm);
+							para.birth = (!para.brithday || para.brithday == '') ? '' : util.formatDate.format(new Date(para.brithday), 'yyyy-MM-dd');
+							editUser(para).then((res) => {
+								this.editLoading = false;
+								//NProgress.done();
+								this.$message({
+									message: '提交成功',
+									type: 'success'
+								});
+								this.$refs['editForm'].resetFields();
+								this.editFormVisible = false;
+								this.getUsers();
+							});
+						});
+					}
+				});
+		}
     },
     mounted() {
 			this.getUsers();

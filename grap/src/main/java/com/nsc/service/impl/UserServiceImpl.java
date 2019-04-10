@@ -68,9 +68,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateUser(User user) {
-		// TODO Auto-generated method stub
-
+	public Result updateUser(User user) {
+		Result result = new Result();
+		mapper.updateUser(user);
+		redisUtil.del("findUserPage");
+		List<User> list = mapper.findUserInfo();
+		redisUtil.lSet("findUserPage", list);
+		result.setCode(200);
+		result.setMsg("修改成功");
+		return result;
 	}
 
 	@Override

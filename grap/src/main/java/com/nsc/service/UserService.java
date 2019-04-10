@@ -14,7 +14,7 @@ public interface UserService {
 	
 	Result saveUser(User user); //保存
 	
-	void updateUser(User user); //修改用户信息
+	Result updateUser(User user); //修改用户信息
 	
 	List<User> findUserName(String userName);//模糊查询姓名
 	

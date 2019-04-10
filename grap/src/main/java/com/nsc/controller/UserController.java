@@ -35,4 +35,8 @@ public class UserController {
 	public Result saveUser(User user){
 		return userServiceImpl.saveUser(user);
 	}
+	@RequestMapping(value="editUser")
+	public Result editUser(User user){
+		return userServiceImpl.updateUser(user);
+	}
 }
