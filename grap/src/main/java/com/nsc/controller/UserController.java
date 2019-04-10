@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nsc.pojo.PageUtil;
+import com.nsc.pojo.Result;
 import com.nsc.pojo.User;
 import com.nsc.service.impl.UserServiceImpl;
 
@@ -29,5 +30,9 @@ public class UserController {
 		}
 		Integer end = (start - 1) + pagesize;
 		return userServiceImpl.findUserPage(start, end,pagesize);
+	}
+	@RequestMapping(value="/saveUser")
+	public Result saveUser(User user){
+		return userServiceImpl.saveUser(user);
 	}
 }

@@ -3,7 +3,7 @@ package com.nsc.pojo;
 import java.sql.Date;
 
 public class User {
-	private Integer id;
+	private String id;
 	private String userName;
 	private Integer age;
 	private Date ctm;
@@ -20,21 +20,14 @@ public class User {
 	
 	public User() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", age=" + age + ", ctm=" + ctm + ", sex=" + sex
-				+ ", address=" + address + ", isredis=" + isredis + ", createDate=" + createDate + ", updateTime="
-				+ updateTime + ", brithday=" + brithday + ", sort=" + sort + ", password=" + password + ", salt=" + salt
-				+ ", name=" + name + "]";
-	}
-
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -142,7 +135,7 @@ public class User {
 		this.name = name;
 	}
 
-	public User(Integer id, String userName, Integer age, Date ctm, String sex, String address, boolean isredis,
+	public User(String id, String userName, Integer age, Date ctm, String sex, String address, boolean isredis,
 			Date createDate, Date updateTime, Date brithday, int sort, String password, String salt, String name) {
 		super();
 		this.id = id;
@@ -161,6 +154,14 @@ public class User {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", userName=" + userName + ", age=" + age + ", ctm=" + ctm + ", sex=" + sex
+				+ ", address=" + address + ", isredis=" + isredis + ", createDate=" + createDate + ", updateTime="
+				+ updateTime + ", brithday=" + brithday + ", sort=" + sort + ", password=" + password + ", salt=" + salt
+				+ ", name=" + name + "]";
+	}
+	
 	
 	
 

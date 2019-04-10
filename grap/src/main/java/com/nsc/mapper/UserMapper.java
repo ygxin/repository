@@ -8,13 +8,13 @@ import org.apache.ibatis.annotations.Param;
 import com.nsc.pojo.User;
 
 @Mapper
-public interface  UserMapper {
+public interface  UserMapper  {
     
 	List<User> findUserInfo(); //查询列表
 	
 	User findUserInfobyId(Integer id);//查询id
 	
-	void saveUser(User user); //保存
+	boolean saveUser(User user); //保存
 	
 	void updateUser(User user); //修改用户信息
 	

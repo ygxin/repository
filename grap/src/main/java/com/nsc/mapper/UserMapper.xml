@@ -9,8 +9,8 @@
 		<result property="address" column="address" />
 		<result property="isredis" column="isRedis" />
 		<result property="brithday" column="brithday" />
-		<result property="createdate" column="createDate" />
-		<result property="updatetime" column="updateTime" />
+		<result property="createDate" column="createdate" />
+		<result property="updateTime" column="updatetime" />
 		<result property="sort" column="sort" />
 		<result property="password" column="password" />
 		<result property="salt" column="salt" />
@@ -24,10 +24,9 @@
 		select a.* from t_user a where a.id = #{value}
 	</select>
 	<insert id="saveUser" parameterType="com.nsc.pojo.User">
-		insert into t_user (id ,username ,sex
-		,age,address,isredis,brithday,createdate,updatetime,sort)
+		insert into t_user (id ,username ,age,sex,address,isredis,createDate,updatetime,brithday,sort,password,salt,name)
 		values
-		(#{id},{username},#{sex},#{age},#{address},#{isredis},#{brithday},#{createdate},#{updatetime},#{sort})
+		(#{id},#{userName},#{age},#{sex},#{address},#{isredis},#{createDate},#{updateTime},#{brithday},#{sort},#{password},#{salt},#{name})
 	</insert>
 	<update id="updateUser" parameterType="com.nsc.pojo.User">
 		update t_user set username = #{username} ,sex = #{sex} ,age = #{age},address

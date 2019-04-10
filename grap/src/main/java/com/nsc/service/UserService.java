@@ -3,6 +3,7 @@ package com.nsc.service;
 import java.util.List;
 
 import com.nsc.pojo.PageUtil;
+import com.nsc.pojo.Result;
 import com.nsc.pojo.User;
 
 public interface UserService {
@@ -11,7 +12,7 @@ public interface UserService {
 	
 	User findUserInfobyId(Integer id);//查询id
 	
-	void saveUser(User user); //保存
+	Result saveUser(User user); //保存
 	
 	void updateUser(User user); //修改用户信息
 	

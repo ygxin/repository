@@ -1,6 +1,7 @@
 package com.nsc.util;
 
 import java.security.MessageDigest;
+import java.sql.Date;
 import java.util.UUID;
 
 import org.springframework.stereotype.Component;
@@ -47,9 +48,15 @@ public class LoginUtil {
 	    String str = uuid.toString();
 	    return str.replace("-", ""); 
 	}
-	/*
+	
+	public static Date getCurrentTime(){
+		Date date = new Date(System.currentTimeMillis());
+		return date;
+	}
+	
 	 public static void main(String[] args) {
 		 //System.out.println(getUuid());
-		 System.out.println(MD5Encode("adminc6b64b1f0fc54b68bf3b3b4df698d4e4"));
-		}*/
+		 //System.out.println(MD5Encode("adminc6b64b1f0fc54b68bf3b3b4df698d4e4"));
+		 System.out.println(getCurrentTime());
+		}
 }
