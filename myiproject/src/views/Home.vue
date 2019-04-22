@@ -110,7 +110,8 @@
       logout:function(){
        this.$confirm('确认退出吗?','提示',{
        }).then(()=>{
-         sessionStorage.removeItem('user');
+         localStorage.removeItem('token');
+         localStorage.removeItem('time');
          this.$router.push('/login');
        }).catch(()=>{
 

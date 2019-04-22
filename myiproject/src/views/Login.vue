@@ -1,4 +1,5 @@
 <template>
+    <el-container class="form"> 
 		<el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-container">
     		<h3 class="title">系统登录</h3>
     		<el-form-item prop="account">
@@ -14,6 +15,7 @@
         <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
     </el-form-item>
   </el-form>
+  </el-container>
 </template>
 <script>
 import { requestLogin } from '../api/api';
@@ -63,8 +65,10 @@ import { requestLogin } from '../api/api';
                   type: 'error'
                 });
               } else {
-                
-                sessionStorage.setItem('user', JSON.stringify(object));
+                let newtime = (new Date()).getTime();
+                localStorage.setItem('time',newtime);
+                localStorage.setItem('token',data.token)
+                console.log(this.$router);
                 this.$router.push({ path: '/table' });
               }
             });
@@ -78,6 +82,12 @@ import { requestLogin } from '../api/api';
 	}
 </script>
 <style>
+  .form{
+    background-image: url(../../static/img/login.png);
+    position: absolute;
+		top: 0px;
+		width: 100%;
+  }
 	.login-container {
     /*box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);*/
     -webkit-border-radius: 5px;
@@ -89,7 +99,7 @@ import { requestLogin } from '../api/api';
     padding: 35px 35px 15px 35px;
     background: #fff;
     border: 1px solid #eaeaea;
-    box-shadow: 0 0 25px #cac6c6;
+    box-shadow: 0 0 25px #cac6c6; 
     
   }
 </style>

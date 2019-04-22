@@ -22,13 +22,8 @@ public class UserController {
 	@RequestMapping(value = "/findUserInfo")
 	public PageUtil findUsers(Integer page, Integer pagesize) {
 		Integer start = 1;
-		if (page < 1||page==1) {
-			start = 0;
-
-		} else {
-			start = 1 + ((page - 1) * pagesize);
-		}
-		Integer end = (start - 1) + pagesize;
+		start = (page-1)*pagesize;
+		Integer end = start + pagesize;
 		return userServiceImpl.findUserPage(start, end,pagesize);
 	}
 	@RequestMapping(value="/saveUser")

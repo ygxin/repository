@@ -33,6 +33,7 @@ public class LoginController {
 					result.setMsg("登陆成功");
 					result.setCode(200);
 					result.setObject(user);
+					result.setToken(LoginUtil.getUuid());
 					HttpSession session = request.getSession();
 					session.setAttribute("user", user);
 					session.setMaxInactiveInterval(60 * 60 * 2); // 单位秒

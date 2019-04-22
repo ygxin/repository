@@ -4,8 +4,8 @@ public class Result {
 	private Object object;
 	private Integer code;
 	private String msg;
+	private String token;
 	public Result() {
-		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Object getObject() {
@@ -26,16 +26,24 @@ public class Result {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-	@Override
-	public String toString() {
-		return "Result [object=" + object + ", code=" + code + ", msg=" + msg + "]";
+	public String getToken() {
+		return token;
 	}
-	public Result(Object object, Integer code, String msg) {
+	public void setToken(String token) {
+		this.token = token;
+	}
+	public Result(Object object, Integer code, String msg, String token) {
 		super();
 		this.object = object;
 		this.code = code;
 		this.msg = msg;
+		this.token = token;
 	}
+	@Override
+	public String toString() {
+		return "Result [object=" + object + ", code=" + code + ", msg=" + msg + ", token=" + token + "]";
+	}
+	
 	
 	
 }
