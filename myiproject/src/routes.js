@@ -4,9 +4,8 @@ import Home from './views/Home.vue'
 import Main from './views/Main.vue'
 import Table from './views/nav1/Table.vue'
 import Form from './views/nav1/Form.vue'
-import user from './views/nav1/user.vue'
-import Page4 from './views/nav2/Page4.vue'
-import Page5 from './views/nav2/Page5.vue'
+import users from './views/nav2/Users.vue'
+import role from './views/nav2/Role.vue'
 import Page6 from './views/nav3/Page6.vue'
 import echarts from './views/charts/echarts.vue'
 import VueRouter from 'vue-router'
@@ -27,27 +26,30 @@ const router = new VueRouter({
             name: '',
             hidden: true
         },
+        {
+            path: '/main',
+            component: Main,
+            name: '主页',
+        },
         //{ path: '/main', component: Main },
         {
             path: '/',
             component: Home,
-            name: '导航一',
-            iconCls: 'el-icon-message',//图标样式class
+            name: '菜单展示',
+            iconCls: 'fa fa-bars',//图标样式class
             children: [
-                { path: '/main', component: Main, name: '主页', hidden: true },
-                { path: '/table', component: Table, name: '用户列表' },
-                { path: '/form', component: Form, name: '表单' },
-                { path: '/user', component: user, name: '列表' },
+                { path: '/table', component: Table,iconCls:'fa fa-table', name: '列表' },
+                { path: '/form', component: Form, iconCls:'fa fa-list-alt', name: '表单' },
             ]
         },
         {
             path: '/',
             component: Home,
-            name: '导航二',
-            iconCls: 'fa fa-id-card-o',
+            name: '系统设置',
+            iconCls: 'fa fa fa-cog',
             children: [
-                { path: '/page4', component: Page4, name: '页面4' },
-                { path: '/page5', component: Page5, name: '页面5' }
+                { path: '/users', component: users, name: '用户管理' },
+                { path: '/role', component: role, name: '角色管理' }
             ]
         },
         {
@@ -57,7 +59,7 @@ const router = new VueRouter({
             iconCls: 'fa fa-address-card',
             leaf: true,//只有一个节点
             children: [
-                { path: '/page6', component: Page6, name: '系统设置' }
+                { path: '/page6', component: Page6, name: '备忘' }
             ]
         },
         {

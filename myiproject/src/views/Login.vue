@@ -69,7 +69,7 @@ import { requestLogin } from '../api/api';
                 localStorage.setItem('time',newtime);
                 localStorage.setItem('token',data.token)
                 console.log(this.$router);
-                this.$router.push({ path: '/table' });
+                this.$router.push({ path: '/main' });
               }
             });
           } else {
@@ -81,7 +81,7 @@ import { requestLogin } from '../api/api';
     }
 	}
 </script>
-<style>
+<style scoped>
   .form{
     background-image: url(../../static/img/login.png);
     position: absolute;
